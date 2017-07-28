@@ -6,10 +6,10 @@
 
 
 
-A security system that uses data science (NMF and SVM) and signal processing (discrete wavelet packets) methods to detect an intruders in a home or business. 
+A security system that uses data science (NMF and SVM) and signal processing (discrete wavelet packets) methods to detect an intruders in a home or business.
 
 # Motivation
-<img src="https://i.imgsafe.org/eb25f4d.jpg" alt="Drawing" style="width: 300px;"/>  
+<img src="https://github.com/Keita1/Steps-Home-Security-Public/blob/master/awake.png" alt="Drawing" style="width: 300px;"/>  
 
 A noise startled me awake at 3AM. As I gathered my wits, I could clearly hear someone clammering about downstairs. I was pretty sure it wasn't my son, and my wife was beside me, asleep. With an adrenaline rush, I snuck downstairs to investigate. I discovered a malfunctioning Roomba whose frequent furniture bumping caused the disturbing clatter.
 
@@ -26,7 +26,7 @@ Using just the time-series accelerometer data for our task would be hard, since 
 
 To do this, each of these pieces (or frames of data) is transformed into a time-frequency format using a discrete wavelet packet transform (WPT). The WPT is converted into a 2-D spectrogram, the pixels from which the features are derived.  
 
-In my code, I use what's called a discrete WPT. An example of raw data, the DWPT, and the corresponding spectrogram is shown below. Each peak in the raw data shows the impact of a foot on the ground in a step. 
+In my code, I use what's called a discrete WPT. An example of raw data, the DWPT, and the corresponding spectrogram is shown below. Each peak in the raw data shows the impact of a foot on the ground in a step.
 <img src="https://i.imgsafe.org/c8ae4c8.png" alt="Drawing" style="width: 450px;"/>  
 
 More pleasing to the human eye is a continuous wavelet packet transform, shown below with the corresponding raw accelerometer data. Again, each peak in the raw data shows the impact of a foot on the ground in a step.
@@ -39,7 +39,7 @@ A last step in pre-processing is aimed at data reduction. An entire spectrogram 
 # Dimensionality Reduction and Classification
 Each combined spectrogram can contain hundreds of features. The typical spectrogram I used contained 1120 features. To make the model more tractable, we reduce the dimensionality of these observations.  
 
-Non-Negative Factorization (NMF) was used to reduce the features from 1120 to 8 components. 
+Non-Negative Factorization (NMF) was used to reduce the features from 1120 to 8 components.
 
 The decomposed observations were then used to train classification models. These models were based on support vector machine (SVM) methodology. This particular SVC used a degree 3 polynomial kernal.
 
@@ -55,14 +55,14 @@ For Model 3, initially a one-class SVM method was tried, but due to the overlap 
 
 ### Results
 
-Below are the results from a 6 model classification. 
-<img src="https://i.imgsafe.org/1ca0336.png" alt="Drawing" style="width: 500px;"/> 
+Below are the results from a 6 model classification.
+<img src="https://i.imgsafe.org/1ca0336.png" alt="Drawing" style="width: 500px;"/>
 
 
 ### What's Next?
 
-The results can be improved in several ways that will improve the performance of the classification model. Here are a few that will be tried in the near future: 
- 
+The results can be improved in several ways that will improve the performance of the classification model. Here are a few that will be tried in the near future:
+
  - Featurization: Using a Continuous Wavelet Transform.   
  - Refine Classification Model by using a custom kernel. I believe that this will allow a OCSVM to be used for intruder detection.
  - Create models to distinguish multiple people, and be invariant to footwear/surface
@@ -92,4 +92,3 @@ SKLearn (NMF for Decomposition and modeling )
 
 1. "Kernel Non-Negative Matrix Factorization for Seismic Signature Separation" - Mehmood and Damarla (2013)
 2. "Seismic Target Classification Using a Wavelet Packet Manifoldin Unattended Ground Sensors Systems" - Huang, et al. (2013)3. "Wavelet Packet Feature Extraction for Vibration Monitoring" - Yen and Lin (1999)
-
