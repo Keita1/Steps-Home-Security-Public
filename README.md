@@ -19,7 +19,7 @@ This experience led motivated me to ask what if I could program my phone to tell
 # Data Collection and Preprocessing
 Accelerometer data (in one of 3 directions) is collected via iPhone accelerometer and an Arduino-based accelerometer. This time-series data split into small, overlapping frames. Here is what that framed, raw data looks like:  
 
-<img src="https://i.imgsafe.org/532b512.png" alt="Drawing" style="width: 600px;"/>
+<img src="https://github.com/Keita1/Steps-Home-Security-Public/blob/master/windowing.png" alt="Drawing" style="width: 600px;"/>
 The above figure takes a few seconds of data and turns it into eight overlapping pieces.  
 
 Using just the time-series accelerometer data for our task would be hard, since many events and activities could be mixed in with this data. To pull out the required detail, we want to study the signal in both time and frequency space.  
@@ -27,14 +27,11 @@ Using just the time-series accelerometer data for our task would be hard, since 
 To do this, each of these pieces (or frames of data) is transformed into a time-frequency format using a discrete wavelet packet transform (WPT). The WPT is converted into a 2-D spectrogram, the pixels from which the features are derived.  
 
 In my code, I use what's called a discrete WPT. An example of raw data, the DWPT, and the corresponding spectrogram is shown below. Each peak in the raw data shows the impact of a foot on the ground in a step.
-<img src="https://i.imgsafe.org/c8ae4c8.png" alt="Drawing" style="width: 450px;"/>  
 
 More pleasing to the human eye is a continuous wavelet packet transform, shown below with the corresponding raw accelerometer data. Again, each peak in the raw data shows the impact of a foot on the ground in a step.
-<img src="https://i.imgsafe.org/603e05a.png" alt="Drawing" style="width: 500px;"/>   
+<img src="https://github.com/Keita1/Steps-Home-Security-Public/blob/master/cwt.png" alt="Drawing" style="width: 500px;"/>   
 
-A last step in pre-processing is aimed at data reduction. An entire spectrogram is created for a short span of time, say a second. I take a small slice of the WPT for each second and take its reduced spectrogram. I then bind a few of these smaller spectrograms together. In the figure below, each slice corresponds to one second. So, if I want to build a 10 second snapshot, I concatenate 10 such slices.  
-
-<img src="https://i.imgsafe.org/b6c9cd5.png" alt="Drawing" style="width: 300px;"/>   
+A last step in pre-processing is aimed at data reduction. An entire spectrogram is created for a short span of time, say a second. I take a small slice of the WPT for each second and take its reduced spectrogram. I then bind a few of these smaller spectrograms together.   
 
 # Dimensionality Reduction and Classification
 Each combined spectrogram can contain hundreds of features. The typical spectrogram I used contained 1120 features. To make the model more tractable, we reduce the dimensionality of these observations.  
@@ -56,7 +53,7 @@ For Model 3, initially a one-class SVM method was tried, but due to the overlap 
 ### Results
 
 Below are the results from a 6 model classification.
-<img src="https://i.imgsafe.org/1ca0336.png" alt="Drawing" style="width: 500px;"/>
+<img src="https://github.com/Keita1/Steps-Home-Security-Public/blob/master/chart.png" alt="Drawing" style="width: 500px;"/>
 
 
 ### What's Next?
